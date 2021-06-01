@@ -1,37 +1,29 @@
 package com.tranlequyen.appdubaothoitiet;
 
+import android.os.Bundle;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
 
-    Animation zoom;
-    ImageView img;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.activity_main );
+        BottomNavigationView navView = findViewById ( R.id.nav_view );
 
-        zoom = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom);
-        img = findViewById(R.id.image);
-        img.startAnimation(zoom);
-
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent i = new Intent(getApplicationContext(),MainActivity2.class);
-                startActivity(i);
-                finish();
-            }
-        },4000);
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder (
+                R.id.navigation_home,R.id.navigation_dashboard,R.id.navigation_notifications,R.id.navigation_black )
+                .build ();
+        NavController navController = Navigation.findNavController ( this, R.id.nav_host_fragment );
+        NavigationUI.setupActionBarWithNavController ( this, navController, appBarConfiguration );
+        NavigationUI.setupWithNavController ( navView, navController );
     }
+
 }
