@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_location"
+            android:icon="@drawable/ic_home"
+            android:title="" />
+        <item
+            android:id="@+id/nav_current_location"
+            android:icon="@drawable/ic_location"
+            android:title="@string/current_location" />
+    </group>
+
+    <item android:title="@string/favourites">
+        <menu>
+            <group>
+            <item
+                android:id="@+id/favourite_location1"
+                android:icon="@drawable/ic_favourite"
+                android:title=""
+                />
+            <item
+                android:id="@+id/favourite_location2"
+                android:icon="@drawable/ic_favourite"
+                android:title="" />
+            <item
+                android:id="@+id/favourite_location3"
+                android:icon="@drawable/ic_favourite"
+                android:title="" />
+            <item
+                android:id="@+id/favourite_location4"
+                android:icon="@drawable/ic_favourite"
+                android:title="" />
+            <item
+                android:id="@+id/favourite_location5"
+                android:icon="@drawable/ic_favourite"
+                android:title="" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/tools">
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/settings" />
+            <item
+                android:id="@+id/CALLME"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/v_ch_ng_t_i" />
+        </menu>
+    </item>
+    <item android:title="@string/cities">
+        <menu>
+            <item
+                android:id="@+id/taskCity"
+                android:icon="@drawable/ic_baseline_location_city_24"
+                android:title="@string/cities" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,34 +1,90 @@
 <resources>
     <string name="app_name">Weather App</string>
-    <!-- Strings related to login -->
+    <string name="rate_dialog_title" translatable="false">Rate Weather app</string>
+    <string name="rate_dialog_message" translatable="false">Enjoying Weather App Please support us by taking a moment to rate the app. Best, WeatherShare team.</string>
+    <string name="rate_dialog_ok" translatable="false">Rate Now</string>
+    <string name="rate_dialog_cancel" translatable="false">Remind Me Later</string>
+    <string name="rate_dialog_no" translatable="false">No Thanks</string>
+    <string name="bottom_nav_home">Home</string>
+    <string name="bottom_nav_forecast">Forecast</string>
+    <string name="bottom_nav_account">Account</string>
+    <string name="register_email_address">Email Address</string>
+    <string name="register_confirm_email_address">Confirm Email Address</string>
+    <string name="register_password">Password</string>
+    <string name="register_confirm_password">Confirm Password</string>
+    <string name="already_have_an_account">Already Have An Account?</string>
+    <string name="register_button_text">REGISTER</string>
+    <string name="register_go_to_sign_in">Sign In</string>
+    <string name="sign_in_need_an_account">Need An Account?</string>
+    <string name="sign_in_button_text">SIGN IN</string>
+    <string name="go_to_register">Register</string>
+    <string name="forgot_password_send_link">SEND LINK</string>
+    <string name="log_out_button_text">LOG OUT</string>
+    <string name="sign_in_forgot_password">Forgot Password?</string>
+    <string name="forgot_password_click_here">Click Here</string>
+    <string name="submit_button_text" translatable="false">SUBMIT</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">WeatherShare</string>
+    <string name="title_activity_home" translatable="false">Locations</string>
+    <string name="title_activity_forecast_times" translatable="false">ForecastTimes</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="bottom_nav_item_2">Search</string>
+    <string name="seetingsaved">Settings Saved</string>
+    <string name="permissionLocation">Permission needed to access Location</string>
+    <string name="whotoOnGPS" translatable="false"><![CDATA[This permission is needed in order to get weather data for your current location. Manually enable in Settings > Apps & notifications > WeatherShare > Permissions.]]></string>
+    <string name="Cancel">Cancel</string>
+    <string name="GrantedLocation">Access location permission granted</string>
+    <string name="DeniedLocation">Access location permission denied</string>
+    <string name="WaintingLocation">Waiting for location. Please try again.</string>
+    <string name="notGrantedLocation">Access location permission not granted</string>
+    <string name="enableGPS">Please enable GPS</string>
+    <string name="Addedsuccessful">Added successful!</string>
+    <string name="DeletedSucess">Edited successful!</string>
+    <string name="sureDelete">\"Are you sure you want to delete : \"</string>
+    <string name="deletesuccessfull">Deleted successful!</string>
+    <string name="YES">Yes</string>
+    <string name="NO">No</string>
+    <string name="metric_imperial">Metric/Imperial</string>
+    <string name="home_location">Home Location</string>
+    <string name="favourite_locations">Favourite Locations</string>
+    <string name="set_your_home_location">Set your home location</string>
+    <string name="set_your_favourite_locations">Set your favourite locations</string>
+    <string name="change_lang">Change Lang</string>
+    <string name="settings">Settings</string>
+    <string name="units">Units</string>
+    <string name="metric">Metric</string>
+    <string name="imperial">Imperial</string>
+    <string name="english_en">English-en</string>
+    <string name="vietnam_vi">VietNam-vi</string>
+    <string name="ho_chi_minh_city" translatable="false">HO CHI MINH CITY</string>
+    <string name="save">SAVE</string>
+    <string name="_5_day_forecast">5 Day Forecast</string>
+    <string name="min">Min</string>
+    <string name="max">Max</string>
+    <string name="search_city">Search City</string>
+    <string name="email_address_to_share_with">Email Address to Share with</string>
+    <string name="enter_new_city">Enter new city</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_city">Edit City</string>
+    <string name="edit_your_city">Edit your city</string>
+    <string name="edit">Edit</string>
 
-    <string name="title_activity_bottom__navigation_">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Favorite</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_activity_home">MainActivity</string>
-    <string name="title_activity_main3">MainActivity</string>
-    <string name="title_activity_main4">MainActivity</string>
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="city_name">CITY NAME</string>
+    <string name="weather_app">WEATHER APP</string>
+    <string name="favourites">Favourites</string>
+    <string name="tools">Tools</string>
+    <string name="cities">Cities</string>
+    <string name="v_ch_ng_t_i">About us</string>
+    <string name="current_location">Current Location</string>
+    <string name="onbording1" translatable="false">Check real-time weather!</string>
+    <string name="onboarding2" translatable="false">Get potential weather!</string>
+    <string name="onboarding3" translatable="false">Get the weather and stay safe</string>
+    <string name="onboarding1sub" translatable="false">Amet minim mollit non deserunt ullamco est sit aliqua ament sint</string>
+    <string name="onboarding3sub" translatable="false">Amet minim mollit non deserunt ullamco est sit aliqua ament sint</string>
+    <string name="onboarding2sub" translatable="false">Amet minim mollit non deserunt ullamco est sit aliqua ament sint</string>
 
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="onbording1">Check real-time weather!</string>
-    <string name="onboarding2">Get potential weather!</string>
-    <string name="onboarding3">Get the weather and stay safe</string>
-    <string name="onboarding1sub">Amet minim mollit non deserunt ullamco est sit aliqua ament sint</string>
-    <string name="onboarding3sub">Amet minim mollit non deserunt ullamco est sit aliqua ament sint</string>
-    <string name="onboarding2sub">Amet minim mollit non deserunt ullamco est sit aliqua ament sint</string>
 </resources>

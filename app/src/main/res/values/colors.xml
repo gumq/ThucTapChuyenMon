@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#ffffff</color>
     <color name="Blue">#3949AB</color>
+    <color name="colorLight">#FFFFFF</color>
     <color name="lightBlue">#9E7AEA</color>
 <color name="white">#F8FDFEFF</color>
     <color name="Blue2">#039BE5</color>
     <color name="bgBottomNavigation">#fe485a</color>
+    <color name="colorDark">#000000</color>
     </resources>

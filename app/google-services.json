@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "73698618970",
+    "project_id": "driven-airway-316008",
+    "storage_bucket": "driven-airway-316008.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73698618970:android:96c3a44e18e09e49477263",
+        "android_client_info": {
+          "package_name": "com.tranlequyen.appdubaothoitiet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "73698618970-1jaadges9j0r9ih40a89bm1ibibf84ll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tranlequyen.appdubaothoitiet",
+            "certificate_hash": "8ece97edafd6ddbeaa118f1218d89a77796f443f"
+          }
+        },
+        {
+          "client_id": "73698618970-hgr4kse4mguq8bq36rsrcrb6iefedc4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR6FZ0oqU_R39g0nUYI1PaK7ymOt4Kf2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "73698618970-hgr4kse4mguq8bq36rsrcrb6iefedc4d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
