@@ -1,4 +1,4 @@
-package com.tranlequyen.appdubaothoitiet.ui.acticity;
+package com.tranlequyen.appdubaothoitiet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +12,6 @@ import android.widget.ToggleButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.tranlequyen.appdubaothoitiet.R;
 
 public class Settings extends AppCompatActivity {
 
@@ -46,7 +45,7 @@ public class Settings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_settings);
+        setContentView(R.layout.activity_settings);
 
         mHomeLocationTextView = findViewById(R.id.home_location);
         mFavouriteLocation1TextView = findViewById(R.id.favourite_location_1);

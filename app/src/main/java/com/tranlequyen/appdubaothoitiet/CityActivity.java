@@ -1,4 +1,4 @@
-package com.tranlequyen.appdubaothoitiet.ui.acticity;
+package com.tranlequyen.appdubaothoitiet;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,20 +11,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.tranlequyen.appdubaothoitiet.R;
-import  com.tranlequyen.appdubaothoitiet.db.Databases;
-import com.tranlequyen.appdubaothoitiet.db.Task;
-import com.tranlequyen.appdubaothoitiet.adapter.TaskAdapter;
-
+import com.google.android.material.card.MaterialCardView;
+import com.tranlequyen.appdubaothoitiet.weatherapp.db.Databases;
+import com.tranlequyen.appdubaothoitiet.weatherapp.db.Task;
+import com.tranlequyen.appdubaothoitiet.weatherapp.db.TaskAdapter;
 
 import java.util.ArrayList;
 
 public class CityActivity extends AppCompatActivity {
-
+    MaterialCardView cardView;
     Databases databases;
     ListView lvTask;
     ArrayList<Task> taskArrayList;
@@ -33,7 +33,7 @@ public class CityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_city);
+        setContentView(R.layout.activity_city);
         addViews();
         PrepareDB();
         GetData();
@@ -41,6 +41,7 @@ public class CityActivity extends AppCompatActivity {
     }
 
     private void addViews() {
+        cardView = findViewById ( R.id.cardview );
         lvTask = findViewById(R.id.lvTask);
         taskArrayList = new ArrayList<> ();
         taskAdapter = new TaskAdapter(CityActivity.this, R.layout.item_row,
@@ -56,11 +57,6 @@ public class CityActivity extends AppCompatActivity {
                 "CREATE TABLE IF NOT EXISTS Cities(Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         "WorkName VARCHAR(200))"
         );
-        //Insert data
-//        databases.QueryData("INSERT INTO Works VALUES(null, 'Fix bugs')");
-//        databases.QueryData("INSERT INTO Works VALUES(null, 'Coding')");
-//        databases.QueryData("INSERT INTO Works VALUES(null, 'Meeting')");
-//        databases.QueryData("INSERT INTO Works VALUES(null, 'Walking')");
     }
 
     private void GetData() {
@@ -69,7 +65,6 @@ public class CityActivity extends AppCompatActivity {
         while(c.moveToNext()){
             int taskId = c.getInt(0);
             String taskName = c.getString(1);
-            //Log.i("Works: ", taskId + " - " + taskName);
             taskArrayList.add(new Task(taskId, taskName,null));
         }
         taskAdapter.notifyDataSetChanged();
@@ -127,7 +122,7 @@ public class CityActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog (this);
         dialog.setContentView(R.layout.custom_dialog_edit);
 
-        final EditText edtTaskName = dialog.findViewById(R.id.edtEditTask);
+        final TextView edtTaskName = dialog.findViewById(R.id.edtEditTask);
         Button btnEditTask = dialog.findViewById(R.id.btnEdit);
         Button btnCancel = dialog.findViewById(R.id.btnCancelEdit);
 

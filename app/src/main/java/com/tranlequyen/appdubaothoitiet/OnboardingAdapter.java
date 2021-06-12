@@ -1,4 +1,4 @@
-package com.tranlequyen.appdubaothoitiet.adapter;
+package com.tranlequyen.appdubaothoitiet;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.tranlequyen.appdubaothoitiet.ui.fragment.OnboardingItem;
-import com.tranlequyen.appdubaothoitiet.R;
 
 import java.util.List;
 

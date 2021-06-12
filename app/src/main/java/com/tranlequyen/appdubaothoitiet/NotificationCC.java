@@ -31,6 +31,7 @@ public class NotificationCC extends Application {
         String bigTitle = "Hình nè";
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(view.getContext());
 
+
         Bitmap largeIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.icon_clear);
 
 
@@ -43,8 +44,8 @@ public class NotificationCC extends Application {
                         .bigText(bigText)
                         .setBigContentTitle(bigTitle)
                         .setSummaryText(summary))
-                .setPriority( NotificationCompat.PRIORITY_HIGH)
-                .setCategory( NotificationCompat.CATEGORY_MESSAGE)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setColor( Color.BLUE)
                 .setContentIntent(contentIntent)
                 .setAutoCancel(true)

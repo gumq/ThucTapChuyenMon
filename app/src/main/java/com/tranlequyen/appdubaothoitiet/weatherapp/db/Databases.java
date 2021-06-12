@@ -1,4 +1,4 @@
-package com.tranlequyen.appdubaothoitiet.db;
+package com.tranlequyen.appdubaothoitiet.weatherapp.db;
 
 import android.content.Context;
 import android.database.Cursor;

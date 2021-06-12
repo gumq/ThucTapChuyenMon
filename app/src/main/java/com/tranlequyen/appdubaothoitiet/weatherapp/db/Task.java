@@ -1,4 +1,4 @@
-package com.tranlequyen.appdubaothoitiet.db;
+package com.tranlequyen.appdubaothoitiet.weatherapp.db;
 
 public class Task {
     private int taskId;

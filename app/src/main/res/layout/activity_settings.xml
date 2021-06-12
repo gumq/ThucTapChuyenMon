@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container2"
@@ -45,14 +45,16 @@
                 android:id="@+id/favouriteLocationsDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:text="@string/set_your_favourite_locations"
                 android:textColor="@color/colorLight"
                 android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/favourite_location_3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/favouriteLocationsSetting" />
+                app:layout_constraintTop_toBottomOf="@+id/favouriteLocationsSetting"
+                app:layout_constraintVertical_bias="0.055" />
 
             <TextView
                 android:id="@+id/fingerprintTextView"
@@ -193,10 +195,10 @@
 
             <AutoCompleteTextView
                 android:id="@+id/favourite_location_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="164dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:completionThreshold="2"
                 android:ems="10"
                 android:padding="16dp"
@@ -204,12 +206,14 @@
                 android:textColorHint="@color/colorAccent"
                 android:textSize="14sp"
                 app:backgroundTint="@color/colorLight"
+                app:layout_constraintEnd_toStartOf="@+id/favourite_location_3"
+                app:layout_constraintHorizontal_bias="0.076"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/favouriteLocationsDescription" />
 
             <AutoCompleteTextView
                 android:id="@+id/favourite_location_2"
-                android:layout_width="162dp"
+                android:layout_width="164dp"
                 android:layout_height="47dp"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="36dp"
@@ -227,9 +231,10 @@
 
             <AutoCompleteTextView
                 android:id="@+id/favourite_location_3"
-                android:layout_width="161dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="164dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="19dp"
                 android:layout_marginEnd="28dp"
                 android:completionThreshold="2"
                 android:ems="10"
@@ -239,14 +244,15 @@
                 android:textSize="14sp"
                 app:backgroundTint="@color/colorLight"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/favourite_location_1"
                 app:layout_constraintTop_toBottomOf="@+id/favourite_location_2" />
 
             <AutoCompleteTextView
                 android:id="@+id/favourite_location_4"
-                android:layout_width="169dp"
-                android:layout_height="52dp"
+                android:layout_width="164dp"
+                android:layout_height="45dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="11dp"
+                android:layout_marginEnd="55dp"
                 android:completionThreshold="2"
                 android:ems="10"
                 android:padding="16dp"
@@ -255,14 +261,15 @@
                 android:textSize="14sp"
                 app:backgroundTint="@color/colorLight"
                 app:layout_constraintBottom_toBottomOf="@+id/favourite_location_5"
+                app:layout_constraintEnd_toStartOf="@+id/favourite_location_5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/favourite_location_1"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="1.0" />
 
             <AutoCompleteTextView
                 android:id="@+id/favourite_location_5"
-                android:layout_width="159dp"
-                android:layout_height="50dp"
+                android:layout_width="164dp"
+                android:layout_height="45dp"
                 android:layout_marginEnd="28dp"
                 android:layout_marginBottom="132dp"
                 android:completionThreshold="2"

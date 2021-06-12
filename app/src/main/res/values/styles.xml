@@ -1,23 +1,30 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme1" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">#0E0E0E</item>
+        <item name="colorPrimaryDark">#111212</item>
+        <item name="colorAccent">#121213</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
-
-
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-    <item name="colorPrimary">#2948F6</item>
+    <style name="AppTheme2" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#2948F6</item>
         <item name="colorPrimaryDark">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme1" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#020487</item>
+        <item name="colorPrimaryDark">#324EDA</item>
+        <item name="colorAccent">#0538BD</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
 
     <style name="NoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">#0971A3</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowDisablePreview">true</item>
@@ -31,6 +38,7 @@
     <style name="NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
     <style name="TextViewInColoredCard">
         <item name="android:textColor">@android:color/white</item>

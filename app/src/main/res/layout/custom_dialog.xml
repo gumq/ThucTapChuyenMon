@@ -7,7 +7,7 @@
     app:layout_constraintCircleRadius="25dp"
     android:background="#ecf0f1">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Cites"
@@ -19,18 +19,16 @@
         android:textStyle="bold"
         />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:stateListAnimator="@drawable/ic_favourite"
         android:id="@+id/edtTask"
+        android:focusableInTouchMode="true"
         android:hint="@string/enter_new_city"
         android:textSize="30sp"
         android:layout_margin="5dp"
         android:paddingTop="10dp"/>
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-       android:src="@color/colorPrimaryDark" />
 
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,18 +37,21 @@
         android:gravity="center">
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/btnOk"
+            android:layout_width="131dp"
             android:layout_height="wrap_content"
+            android:background="#8C9EFF"
             android:text="@string/ok"
-            android:textSize="26sp"
-            android:id="@+id/btnOk"/>
+            android:textSize="26sp" />
+
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/btnCancel"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:textSize="26sp"
             android:layout_marginStart="10dp"
-            android:id="@+id/btnCancel"/>
+            android:background="#FFFF8D"
+            android:text="@string/cancel"
+            android:textSize="26sp" />
 
     </LinearLayout>
 

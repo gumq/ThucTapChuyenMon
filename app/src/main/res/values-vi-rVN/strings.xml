@@ -27,10 +27,10 @@
     <string name="DeniedLocation">Chưa cấp quyền truy cập vị trí</string>
     <string name="WaintingLocation">"Vui lòng đợi  để thiết bị truy cập vị trí "</string>
     <string name="notGrantedLocation">Quyền truy cập vị trí không được cấp</string>
-    <string name="enableGPS">Vui ;òng mở GPS</string>
+    <string name="enableGPS">Vui lòng mở GPS</string>
     <string name="Addedsuccessful">Đã thêm thành công!</string>
     <string name="DeletedSucess">Đã sữa thành công</string>
-    <string name="sureDelete">Bạn có chắn chắn muốn xóa</string>
+    <string name="sureDelete">Bạn có chắn chắn muốn xóa </string>
     <string name="deletesuccessfull">Đã xóa thành công</string>
     <string name="YES">Có</string>
     <string name="NO">Không</string>

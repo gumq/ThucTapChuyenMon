@@ -1,7 +1,5 @@
-package com.tranlequyen.appdubaothoitiet.ui.acticity;
+package com.tranlequyen.appdubaothoitiet;
 
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +8,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.tranlequyen.appdubaothoitiet.R;
-import com.tranlequyen.appdubaothoitiet.ui.acticity.BoardingActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -27,11 +25,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         img = findViewById(R.id.image);
         img.startAnimation(zoom);
 
-        Handler h = new Handler();
-        h.postDelayed(new Runnable() {
+        Handler h = new Handler ();
+        h.postDelayed(new Runnable () {
             @Override
             public void run() {
-                Intent i = new Intent(getApplicationContext(), BoardingActivity.class);
+                    Intent i = new Intent (getApplicationContext(),BoardingActivity.class);
                 startActivity(i);
                 finish();
             }

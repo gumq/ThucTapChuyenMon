@@ -1,9 +1,4 @@
-package com.tranlequyen.appdubaothoitiet.ui.acticity;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager2.widget.ViewPager2;
-
+package com.tranlequyen.appdubaothoitiet;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.google.android.material.button.MaterialButton;
-import com.tranlequyen.appdubaothoitiet.SplashScreenLOGO;
-import com.tranlequyen.appdubaothoitiet.adapter.OnboardingAdapter;
-import com.tranlequyen.appdubaothoitiet.R;
-import com.tranlequyen.appdubaothoitiet.ui.fragment.OnboardingItem;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#8849F6"
-    tools:context=".ui.acticity.SplashScreenActivity">
+    tools:context=".SplashScreenActivity">
 
     <ImageView
         android:id="@+id/image"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="cursive"
         android:text="Weather"
-        android:textColor="@color/white"
+        android:textColor="@color/colorLight"
         android:textSize="60dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
         android:text="App"
-        android:textColor="@color/white"
+        android:textColor="@color/colorLight"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

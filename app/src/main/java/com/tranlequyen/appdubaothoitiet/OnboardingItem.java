@@ -1,4 +1,4 @@
-package com.tranlequyen.appdubaothoitiet.ui.fragment;
+package com.tranlequyen.appdubaothoitiet;
 
 public class OnboardingItem {
 

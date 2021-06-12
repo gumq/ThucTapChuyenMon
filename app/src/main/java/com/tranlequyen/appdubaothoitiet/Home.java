@@ -1,15 +1,15 @@
-package com.tranlequyen.appdubaothoitiet.ui.acticity;
+package com.tranlequyen.appdubaothoitiet;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -37,28 +37,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
-import com.tranlequyen.appdubaothoitiet.GPStracker;
-import com.tranlequyen.appdubaothoitiet.NotificationCC;
-import com.tranlequyen.appdubaothoitiet.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import hotchemi.android.rate.AppRate;
-import sendinblue.ApiClient;
-import sendinblue.ApiException;
-import sendinblue.Configuration;
-import sendinblue.auth.ApiKeyAuth;
-import sibApi.SmtpApi;
-import sibModel.SendSmtpEmail;
-import sibModel.SendSmtpEmailSender;
-import sibModel.SendSmtpEmailTo;
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -91,8 +78,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private TextView mTempForecast4;
     private TextView mTempForecast5;
     private AutoCompleteTextView mSearchField;
-    private EditText mSharedUserEmailText;
-    private String mSharedUserEmail;
     private String mHomeLocation;
     private String mLocationFinal;
     private String mSearchLocation;
@@ -108,14 +93,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_home);
+        setContentView(R.layout.activity_home);
         AnhXa();
-        AppRate.with(this)
-                .setInstallDays(7)
-                .setLaunchTimes(5)
-                .setRemindInterval(2)
-                .monitor();
-        AppRate.showRateDialogIfMeetsConditions(this);
+       // findWeather ( "Saigon",null,null );
+//        AppRate.with(this)
+//                .setInstallDays(7)
+//                .setLaunchTimes(5)
+//                .setRemindInterval(2)
+//                .monitor();
+//        AppRate.showRateDialogIfMeetsConditions(this);
         //AppRate.with(this).showRateDialog(this);
 
 
@@ -189,33 +175,25 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 return false;
             }
         });
-
-        ImageView shareIcon = findViewById(R.id.share_icon);
+// Share ung dung/ share thoi tiet
+        ImageView shareIcon = findViewById(R.id.share);
         shareIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMail();
-                Toast.makeText(Home.this, "Weather report emailed to: " + mSharedUserEmail, Toast.LENGTH_LONG).show();
-            }
-        });
+                    ApplicationInfo api = getApplicationContext ().getApplicationInfo ();
+                   // String apkpath = api.sourceDir;
+                    Intent intent = new Intent ( Intent.ACTION_SEND );
+                    intent.setType ( "text/plain" );
+                    String shareI ="THOI TIET HOM NAY:-https://www.accuweather.com/vi/vn/ho-chi-minh-city/353981/hourly-weather-forecast/353981 ";
+                    String sharesub="Du bao thoi tiet hom nay";
+                    intent.putExtra ( Intent.EXTRA_SUBJECT,sharesub );
+                    intent.putExtra ( Intent.EXTRA_TEXT,shareI );
+                   // intent.putExtra ( Intent.EXTRA_STREAM, Uri.fromFile ( new File ( apkpath ) ) );
+                    startActivity ( Intent.createChooser ( intent, "Share App" ) );
 
-        mSharedUserEmailText = findViewById(R.id.shared_user_email);
-        mSharedUserEmailText.setOnKeyListener(new View.OnKeyListener() {
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    switch (keyCode) {
-                        case KeyEvent.KEYCODE_DPAD_CENTER:
-                        case KeyEvent.KEYCODE_ENTER:
-                            sendMail();
-                            Toast.makeText(Home.this, "Weather report emailed to: " + mSharedUserEmail, Toast.LENGTH_LONG).show();
-                            return true;
-                        default:
-                            break;
-                    }
-                }
-                return false;
-            }
-        });
+
+            } });
+
 // Menu navigation drawn
         final Menu menu = navigationView.getMenu();
         MenuItem navHomeLocation = menu.findItem(R.id.nav_home_location);
@@ -255,7 +233,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     private void AnhXa() {
 
-        mSharedUserEmailText = findViewById(R.id.shared_user_email);
+        //mSharedUserEmailText = findViewById(R.id.shared_user_email);
         mTemperatureText = findViewById(R.id.temperatureText);
         mLocationText = findViewById(R.id.locationText);
         mDescriptionText = findViewById(R.id.descriptionText);
@@ -341,8 +319,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen( GravityCompat.START)) {
-            drawer.closeDrawer( GravityCompat.START);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -401,7 +379,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer( GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -965,68 +943,4 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         queue.add(jor);
     }
 
-    private void sendMail() {
-
-        mSharedUserEmail = mSharedUserEmailText.getText().toString().trim();
-        if (mSharedUserEmail.trim().isEmpty()) {
-            return;
-        }
-
-        String temperature = mTemperatureText.getText().toString();
-        String minTemp = mMinTempText.getText().toString();
-        String maxTemp = mMaxTempText.getText().toString();
-        String description = mDescriptionText.getText().toString().toUpperCase();
-        String humidity = mHumidityText.getText().toString();
-        String pressure = mPressureText.getText().toString();
-        String windSpeed = mWindSpeedText.getText().toString();
-        String windDirection = mWindDegreesText.getText().toString();
-        String sunrise = mSunriseText.getText().toString();
-        String sunset = mSunsetText.getText().toString();
-        String indexUV = mIndexUV.getText().toString();
-
-        String day1 = mDay1Text.getText().toString();
-        String day2 = mDay2Text.getText().toString();
-        String day3 = mDay3Text.getText().toString();
-        String day4 = mDay4Text.getText().toString();
-        String day5 = mDay5Text.getText().toString();
-        String descrDay1 = mDescription1Text.getText().toString().toUpperCase();
-        String descrDay2 = mDescription2Text.getText().toString().toUpperCase();
-        String descrDay3 = mDescription3Text.getText().toString().toUpperCase();
-        String descrDay4 = mDescription4Text.getText().toString().toUpperCase();
-        String descrDay5 = mDescription5Text.getText().toString().toUpperCase();
-        String tempDay1 = mTempForecast1.getText().toString();
-        String tempDay2 = mTempForecast2.getText().toString();
-        String tempDay3 = mTempForecast3.getText().toString();
-        String tempDay4 = mTempForecast4.getText().toString();
-        String tempDay5 = mTempForecast5.getText().toString();
-
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-
-        ApiKeyAuth apiKey = (ApiKeyAuth) defaultClient.getAuthentication("api-key");
-      //  apiKey.setApiKey("AAAA9MLcx-0:APA91bE-08OhcvCrp9FreGyd357w3d_IYGA-txUlWrVvhgTS9RMAAHZbxU07yHoHEMf9ARSoCnlKE8GCbK6VqJtm-Brl5nZkYqv_cGfW3I9q4gHYRd21NI4918wvH0T_bscYTJn_abth");
-        apiKey.setApiKey ( "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" );
-        final SmtpApi apiInstance = new SmtpApi();
-
-        List<SendSmtpEmailTo> emailArrayList = new ArrayList<> ();
-        emailArrayList.add(new SendSmtpEmailTo().email(mSharedUserEmail));
-
-        final SendSmtpEmail sendSmtpEmail = new SendSmtpEmail();
-        sendSmtpEmail.sender(new SendSmtpEmailSender().email("tranquyen14042000@gmail.com").name("WeatherShare"));
-        sendSmtpEmail.to(emailArrayList);
-        sendSmtpEmail.subject("You've received a Shared Weather Report");
-        sendSmtpEmail.htmlContent("WATHER TODAY");
-
-        Thread thread = new Thread ( new Runnable () {
-            @Override
-            public void run() {
-                try {
-                    apiInstance.sendTransacEmail(sendSmtpEmail);
-                } catch (ApiException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-
-    }
 }

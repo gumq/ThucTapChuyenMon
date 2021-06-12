@@ -1,4 +1,4 @@
-package com.tranlequyen.appdubaothoitiet.adapter;
+package com.tranlequyen.appdubaothoitiet.weatherapp.db;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,15 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tranlequyen.appdubaothoitiet.ui.acticity.CityActivity;
+import com.google.android.material.card.MaterialCardView;
+import com.tranlequyen.appdubaothoitiet.CityActivity;
 import com.tranlequyen.appdubaothoitiet.R;
-import com.tranlequyen.appdubaothoitiet.db.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends BaseAdapter {
-
+    MaterialCardView cardView;
     private CityActivity context;
     private int layout;
     private List<Task> taskList;
@@ -25,9 +24,7 @@ public class TaskAdapter extends BaseAdapter {
         this.context = context;
         this.layout = layout;
         this.taskList = taskList;
-    }
 
-    public TaskAdapter(CityActivity cityActivity, int item_row, ArrayList<Task> taskArrayList) {
     }
 
     @Override
@@ -82,6 +79,7 @@ public class TaskAdapter extends BaseAdapter {
     }
 
     private static class ViewHolder{
+        MaterialCardView cardView;
         TextView txtTaskName;
         ImageView imvDelete, imvEdit;
     }

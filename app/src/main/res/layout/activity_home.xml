@@ -21,7 +21,7 @@
         android:fitsSystemWindows="true"
         android:visibility="invisible"
         app:headerLayout="@layout/nav_header_home"
-        android:background="@color/common_google_signin_btn_text_light_focused"
+        android:background="@color/colorLight"
         app:menu="@menu/activity_home_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
