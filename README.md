@@ -5,27 +5,29 @@
 # Đề tài: Android App Dự Báo Thời Tiết
   Giảng viên : Thầy Nguyễn Lê Minh.
 ## I. Công Nghệ Sử Dụng
-* Công nghệ: Android ,Weather Api( OpenWeathermap ), Firebase,....
+* Công nghệ: Android ,Weather Api( OpenWeathermap ), Firebase,SQLite,..
 * Công cụ: Android Studio, SQLite,.
 * Ngôn ngữ lập trình: Java, XML, Json.
 ## II. Các Chức Năng Đã Hoàn Thiện
-1. Splash screen -Activity khởi chạy load Logo app. 
-2. Boarding screen - Activity giới thiệu app ở lần đầu tiên cài đặt.
-3. Tìm kiếm và trả về data thời tiết cho bất kì thành phố nào có chỉ số UV.
-4. Dự báo thời tiết cho 5 ngày tiếp theo. 
-5. Lấy được vị trí hiện tại, Trả ra kết quả thời tiết.
-6. Lưu vị trí hiện tại.
-7. Tự động đồng bộ background theo tình trạng thời tiết trả về
-8. Lưu được 5 vị trí thành phố yêu thích và thành phố mặc định.
-9. Có chức năng để thay đổi Độ C <-> Độ F
-10. Đa ngôn ngữ en-vi.
-11. Có database SQLite trong ứng dụng.
-12. Có thể thao tác thêm sửa xóa các thành phố trong danh sách của database.
+1. Splash screen -Activity khởi chạy đầu ứng dụng. 
+2. Boarding screen - Activity giới thiệu ứng dụng khi lần đầu tiên cài đặt.
+3. Tìm kiếm thành phố và trả về data thời tiết cho bất kì thành phố nào 
+4.Trả về dữ liệu thời tiết hiện tại gồm (Nhiệt độ hiện tại , min, max,hướng gió ,Thành phố, Quốc gia ,Tình trạng thời tiết, độ ẩm , tốc độ gió,thời gian mặt trời mọc,lặn ),Có chỉ số UV
+5. Dự báo thời tiết cho 5 ngày tiếp theo.(Thời gian dd/MM/yyyy , icon tình trạng thời tiết , Tình trạng thời tiết , Nhiệt độ) 
+6. Chức năng nhấn để về vị trí hiện tại.
+7. Tự động đồng bộ background theo tình trạng thời tiết trả về và đồng bộ background theo kích thước thiết bị.
+8. Lưu được 5 vị trí thành phố yêu thích và 1 thành phố mặc định.
+9. Chứng năng share app , dữ liệu.
+10. Có Notification 
+11. Chức năng để thay đổi nhiệt độ : Độ C <-> Độ F
+12. Đa ngôn ngữ en-vi.
+13. SQLite trong ứng dụng. Danh sách các thành phố của Việt Nam
+14. Thao tác thêm, sửa, xóa Thành phố trong ứng dụng
+
 
 ## III. Các Chức Năng Chưa Hoàn Thiện
-1. Share thông tin bằng cách gửi Email
-2. Thông báo Message cloude về cho ứng dụng sử dụng FIREBASE
-3. Notification khi ứng dụng đang chạy 
+1. Thông báo Message cloude về cho ứng dụng sử dụng FIREBASE
+
 ### III. Hướng dẫn sử dụng
 * Xuất file apk để dễ cài đặt và sử dụng 
 * Up file apk lên trang web để dễ download

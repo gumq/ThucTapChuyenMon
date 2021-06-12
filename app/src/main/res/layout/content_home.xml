@@ -37,6 +37,15 @@
                 app:layout_constraintTop_toTopOf="@+id/searchField"
                 app:srcCompat="@drawable/ic_menu" />
 
+            <ImageView
+                android:id="@+id/imvNoti"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="308dp"
+                app:layout_constraintEnd_toStartOf="@+id/share"
+                app:layout_constraintTop_toBottomOf="@+id/navDrawerMenu"
+                app:srcCompat="@drawable/ic_favourite" />
+
             <AutoCompleteTextView
                 android:id="@+id/searchField"
                 android:layout_width="0dp"

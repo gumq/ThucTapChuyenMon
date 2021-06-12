@@ -1,12 +1,18 @@
 package com.tranlequyen.appdubaothoitiet;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +32,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -44,9 +52,6 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import hotchemi.android.rate.AppRate;
-
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int ACCESS_LOCATION_PERMISSIONS_REQUEST = 1;
@@ -89,22 +94,21 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private Boolean mSwitchOnOff;
     private Boolean mSwitchOnOff2;
     private ProgressDialog mProgressDialog;
-    NotificationCC notificationCC;
+    ImageView imvNoti;
+    NotificationManagerCompat notificationManagerCompat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         AnhXa();
        // findWeather ( "Saigon",null,null );
-//        AppRate.with(this)
-//                .setInstallDays(7)
-//                .setLaunchTimes(5)
-//                .setRemindInterval(2)
-//                .monitor();
-//        AppRate.showRateDialogIfMeetsConditions(this);
-        //AppRate.with(this).showRateDialog(this);
-
-
+        imvNoti = findViewById ( R.id.imvNoti );
+        imvNoti.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                sendnotification();
+            }
+        } );
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  ) {// > android 6
             if (ContextCompat.checkSelfPermission(Home.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 getPermissionToAccessLocation();
@@ -175,6 +179,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 return false;
             }
         });
+
 // Share ung dung/ share thoi tiet
         ImageView shareIcon = findViewById(R.id.share);
         shareIcon.setOnClickListener(new View.OnClickListener() {
@@ -190,7 +195,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     intent.putExtra ( Intent.EXTRA_TEXT,shareI );
                    // intent.putExtra ( Intent.EXTRA_STREAM, Uri.fromFile ( new File ( apkpath ) ) );
                     startActivity ( Intent.createChooser ( intent, "Share App" ) );
-
 
             } });
 
@@ -230,6 +234,27 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             findForecast(mHomeLocation, "", "");
         }
     }
+
+    private void sendnotification() {
+        Intent reintent = new Intent ( this,Home.class );
+        PendingIntent pendingIntent = PendingIntent.getActivities ( this,1, new Intent[]{reintent},PendingIntent.FLAG_UPDATE_CURRENT );
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+
+        Notification notification = new NotificationCompat.Builder(this, NotificationApp.CHANNEL_1_ID)
+
+                .setSmallIcon(R.drawable.icon_rain)
+                .setContentTitle("Thời tiết hôm nay")
+                .setContentText("Có thể sẽ mưa ")
+                .setAutoCancel ( true )
+                .setContentIntent ( pendingIntent )
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        int notificationId = 1;
+        notificationManagerCompat.notify(notificationId, notification);
+    }
+
 
     private void AnhXa() {
 
@@ -579,7 +604,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         RequestQueue queue = Volley.newRequestQueue(Home.this);
         queue.add(jor);
     }
-
+// Curent UV
     private void findIndexUV(String latitude, String longitude) {
 
         String BASE_URL = "https://api.openweathermap.org/data/2.5/uvi?";
