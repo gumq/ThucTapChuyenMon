@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class Databases extends SQLiteOpenHelper {
+   String Data_PATH ="/databases/";
 
     public Databases(@Nullable Context context, @Nullable String name,
                      @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -16,7 +17,8 @@ public class Databases extends SQLiteOpenHelper {
 
     //Truy vấn không trả kết quả (CREATE, INSERT, UPDATE, DELETE, ...)
     public void QueryData(String sql){
-        SQLiteDatabase db = getWritableDatabase();
+
+        SQLiteDatabase  db = getWritableDatabase();
         db.execSQL(sql);
     }
 

@@ -86,5 +86,10 @@
     <string name="onboarding1sub" translatable="false">Amet minim mollit non deserunt ullamco est sit aliqua ament sint</string>
     <string name="onboarding3sub" translatable="false">Amet minim mollit non deserunt ullamco est sit aliqua ament sint</string>
     <string name="onboarding2sub" translatable="false">Amet minim mollit non deserunt ullamco est sit aliqua ament sint</string>
+    <string name="uvlow">UV Index: Low</string>
+    <string name="uvmoderate">UV Index: Moderate</string>
+    <string name="uvhigh">UV Index: High</string>
+    <string name="uvveryhigh">UV Index: Very High</string>
+    <string name="uvextreme">UV Index: Extreme</string>
 
 </resources>

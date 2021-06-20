@@ -2,17 +2,13 @@ package com.tranlequyen.appdubaothoitiet;
 
 import android.Manifest;
 import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,8 +77,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private TextView mTempForecast3;
     private TextView mTempForecast4;
     private TextView mTempForecast5;
+    private TextView txtclickchitiet;
     private AutoCompleteTextView mSearchField;
     private String mHomeLocation;
+    String mDescription;
     private String mLocationFinal;
     private String mSearchLocation;
     private String mFavouriteLocation1;
@@ -96,12 +93,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private ProgressDialog mProgressDialog;
     ImageView imvNoti;
     NotificationManagerCompat notificationManagerCompat;
+    private String SearchLocation1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         AnhXa();
-       // findWeather ( "Saigon",null,null );
+
         imvNoti = findViewById ( R.id.imvNoti );
         imvNoti.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -120,14 +119,16 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
         mSwitchOnOff = sharedPreferences.getBoolean("switchUnits", false);
         mSwitchOnOff2 = sharedPreferences.getBoolean("switchLangs", false);
-        mHomeLocation = sharedPreferences.getString("homeLocation", "");
+        mHomeLocation = sharedPreferences.getString("homeLocation", "HO CHI MINH");
         mFavouriteLocation1 = sharedPreferences.getString("favouriteLocation1", "");
         mFavouriteLocation2 = sharedPreferences.getString("favouriteLocation2", "");
         mFavouriteLocation3 = sharedPreferences.getString("favouriteLocation3", "");
         mFavouriteLocation4 = sharedPreferences.getString("favouriteLocation4", "");
         mFavouriteLocation5 = sharedPreferences.getString("favouriteLocation5", "");
 
-
+        if(mHomeLocation==""){
+            findWeather ( "Saigon",null,null );
+        }
 
 
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -147,12 +148,23 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             @Override
             public void onClick(View v) {
                 mSearchLocation = mSearchField.getText().toString();
+
                 findWeather(mSearchLocation, "", "");
                 findForecast(mSearchLocation, "", "");
             }
         });
 
-        mSearchField = findViewById(R.id.searchField);
+
+        txtclickchitiet.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent ( Home.this,ForecastHourlyActivity.class );
+                intent.putExtra("Key_1", mLocationFinal.toString ());
+                intent.putExtra ( "Key2",mDescription.toString ());
+                startActivity ( intent );
+
+            }
+        } );
         mSearchField.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -161,6 +173,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 findForecast(selectedLocation, "", "");
             }
         });
+
 
         mSearchField.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -180,6 +193,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
+
 // Share ung dung/ share thoi tiet
         ImageView shareIcon = findViewById(R.id.share);
         shareIcon.setOnClickListener(new View.OnClickListener() {
@@ -189,7 +203,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                    // String apkpath = api.sourceDir;
                     Intent intent = new Intent ( Intent.ACTION_SEND );
                     intent.setType ( "text/plain" );
-                    String shareI ="THOI TIET HOM NAY:-https://www.accuweather.com/vi/vn/ho-chi-minh-city/353981/hourly-weather-forecast/353981 ";
+                    String shareI ="THOI TIET HOM NAY:-https://www.accuweather.com/vi/vn/ho-chi-minh-city/353981/hourly-weather-forecast/353981 " +
+                            "Tải app: https://webapp.diawi.com/install/Mis51Z";
                     String sharesub="Du bao thoi tiet hom nay";
                     intent.putExtra ( Intent.EXTRA_SUBJECT,sharesub );
                     intent.putExtra ( Intent.EXTRA_TEXT,shareI );
@@ -241,10 +256,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
 
         Notification notification = new NotificationCompat.Builder(this, NotificationApp.CHANNEL_1_ID)
-
                 .setSmallIcon(R.drawable.icon_rain)
-                .setContentTitle("Thời tiết hôm nay")
-                .setContentText("Có thể sẽ mưa ")
+                .setContentTitle(mLocationFinal)
+                .setContentText( mDescription)
                 .setAutoCancel ( true )
                 .setContentIntent ( pendingIntent )
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -254,11 +268,30 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         int notificationId = 1;
         notificationManagerCompat.notify(notificationId, notification);
     }
+    private void sendnotification2() {
+        Intent reintent = new Intent ( this,Home.class );
+        PendingIntent pendingIntent = PendingIntent.getActivities ( this,1, new Intent[]{reintent},PendingIntent.FLAG_UPDATE_CURRENT );
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+
+        Notification notification = new NotificationCompat.Builder(this, NotificationApp.CHANNEL_2_ID)
+
+                .setSmallIcon(R.drawable.icon_rain)
+                .setContentTitle("Cảnh báo chỉ số UV")
+                .setContentText("Nguy cơ làm tổn thương da, mắt bị bỏng nếu tiếp xúc trực tiếp dưới ánh nắng mặt trời ")
+                .setAutoCancel ( true )
+                .setContentIntent ( pendingIntent )
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        int notificationId = 2;
+        notificationManagerCompat.notify(notificationId, notification);
+    }
 
 
     private void AnhXa() {
-
-        //mSharedUserEmailText = findViewById(R.id.shared_user_email);
+        mSearchField = findViewById(R.id.searchField);
+        txtclickchitiet = findViewById ( R.id.txtclickchitiet );
         mTemperatureText = findViewById(R.id.temperatureText);
         mLocationText = findViewById(R.id.locationText);
         mDescriptionText = findViewById(R.id.descriptionText);
@@ -402,6 +435,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             startActivity(cit);
             overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
         }
+        else if (id == R.id.CALLME) {
+            Intent info = new Intent (Home.this, Infomation.class);
+            startActivity(info);
+            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -410,7 +448,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     private void findWeather(String city, String latitude, String longitude) {
 
-        String mWeatherURL;
+        final String mWeatherURL;
 
         if (city.equals("")) {
             String BASE_URL = "https://api.openweathermap.org/data/2.5/weather?";
@@ -472,6 +510,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     String description = arrayObject.getString("description");
                     String weatherId = arrayObject.getString("id");
                     int weatherIdInt = Integer.parseInt(weatherId);
+                    String icon = arrayObject.getString ( "icon" );
 
                     //main object
                     JSONObject mainObject = response.getJSONObject("main");
@@ -489,7 +528,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     //name object
                     String city = response.getString("name");
 
-                    //unix time conversion
+                    // format thời gian trả về
                     SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm:ss (z)");
                     int sunriseInt = Integer.parseInt(sunrise);
                     long sunriseUnix = sunriseInt;
@@ -529,6 +568,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     }
 
                     //final strings
+                    mDescription = description.toUpperCase ()+"\t\t\t"+temp+"°C";
                     mLocationFinal = (city + ", " + country);
                     String humidityFinal = (humidity + "%");
                     String PressureFinal = (pressure + "hPa");
@@ -541,11 +581,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
                     //set views
                     mLocationText.setText(mLocationFinal);
-                    mDescriptionText.setText(description);
+                     mDescriptionText.setText(description);
                     mHumidityText.setText(humidityFinal);
                     mPressureText.setText(PressureFinal);
                     mSunriseText.setText(sunriseFinal);
                     mSunsetText.setText(sunsetFinal);
+
 
                     if (mSwitchOnOff) {
                         //converting wind speed
@@ -619,15 +660,16 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     double indexUV = response.getDouble("value");
 
                     if (indexUV >= 0 && indexUV <= 2) {
-                        mIndexUV.setText("UV Index: Low");
+                        mIndexUV.setText( R.string.uvlow);
                     } else if (indexUV >= 3 && indexUV <= 5) {
-                        mIndexUV.setText("UV Index: Moderate");
+                        mIndexUV.setText( R.string.uvmoderate);
                     } else if (indexUV >= 6 && indexUV <= 7) {
-                        mIndexUV.setText("UV Index: High");
+                        mIndexUV.setText( R.string.uvhigh);
                     } else if (indexUV >= 8 && indexUV <= 10) {
-                        mIndexUV.setText("UV Index: Very High");
+                        mIndexUV.setText( R.string.uvveryhigh);
                     } else {
-                        mIndexUV.setText("UV Index: Extreme");
+                        mIndexUV.setText( R.string.uvextreme);
+                        sendnotification2 ();
                     }
 
                 } catch (JSONException e) {

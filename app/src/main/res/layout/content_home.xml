@@ -41,10 +41,13 @@
                 android:id="@+id/imvNoti"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginEnd="308dp"
-                app:layout_constraintEnd_toStartOf="@+id/share"
-                app:layout_constraintTop_toBottomOf="@+id/navDrawerMenu"
-                app:srcCompat="@drawable/ic_favourite" />
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="17dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/locationText"
+                app:layout_constraintTop_toBottomOf="@+id/share"
+                app:srcCompat="@drawable/ic_baseline_notifications_24" />
 
             <AutoCompleteTextView
                 android:id="@+id/searchField"
@@ -77,23 +80,6 @@
                 app:layout_constraintTop_toTopOf="@+id/searchField"
                 app:srcCompat="@drawable/ic_search_white" />
 
-<!--            <EditText-->
-
-<!--                android:id="@+id/shared_user_email"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:ems="10"-->
-<!--                android:hint="@string/email_address_to_share_with"-->
-<!--                android:inputType="textEmailAddress"-->
-<!--                android:textColor="@color/colorLight"-->
-<!--                android:textColorHint="#F3BAC3BE"-->
-<!--                android:textSize="14sp"-->
-<!--                app:backgroundTint="@color/colorLight"-->
-<!--                app:layout_constraintEnd_toStartOf="@+id/share_icon"-->
-<!--                app:layout_constraintHorizontal_bias="1.0"-->
-<!--                app:layout_constraintStart_toStartOf="@+id/searchField"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/searchField" />-->
 
             <ImageView
                 android:id="@+id/share"
@@ -589,8 +575,8 @@
 
                 <ImageView
                     android:id="@+id/nguon"
-                    android:layout_width="140dp"
-                    android:layout_height="63dp"
+                    android:layout_width="143dp"
+                    android:layout_height="60dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="0dp"
@@ -599,6 +585,27 @@
 
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtclickchitiet"
+                android:layout_width="94dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="92dp"
+                android:layout_marginEnd="74dp"
+                android:gravity="bottom"
+                android:text="Xem chi tiết"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textColorLink="#F85CE1B7"
+                android:linksClickable="true"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
+                app:layout_constraintTop_toBottomOf="@+id/sunsetImage"
+                app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

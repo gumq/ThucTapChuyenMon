@@ -7,13 +7,14 @@
     android:layout_height="match_parent"
     android:background="#ecf0f1">
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/materialCardView"
         android:layout_width="313dp"
         android:layout_height="109dp"
         android:layout_margin="20dp"
         android:layout_marginBottom="349dp"
         app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="#95B3E3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -32,7 +33,7 @@
             android:textSize="36sp"
             android:textStyle="bold" />
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
     <EditText
         android:gravity="center"

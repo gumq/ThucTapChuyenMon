@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,57 +16,122 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.tranlequyen.appdubaothoitiet.weatherapp.db.Databases;
-import com.tranlequyen.appdubaothoitiet.weatherapp.db.Task;
+import com.tranlequyen.appdubaothoitiet.weatherapp.db.TaskCity;
 import com.tranlequyen.appdubaothoitiet.weatherapp.db.TaskAdapter;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class CityActivity extends AppCompatActivity {
-    MaterialCardView cardView;
+  CardView cardView;
     Databases databases;
     ListView lvTask;
-    ArrayList<Task> taskArrayList;
+    ArrayList<TaskCity> taskCityArrayList;
     TaskAdapter taskAdapter;
+    public static final String DATABASE_NAME = "note_db_sqlite";
+    public static final String Data_PATH = "/databases/";
+    public static SQLiteDatabase database = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
         addViews();
-        PrepareDB();
-        GetData();
+        CopydatabasefromAssets();
+     PrepareDB ();
+    // LoadData ();
+     GetData ();
+    }
 
+
+
+    private void CopydatabasefromAssets() {
+        File dbFile = getDatabasePath ( "note_db.sqlite" );
+        if(!dbFile.exists ()){
+            //sao chep du lieu
+            copyDatabase();
+        }else{
+            dbFile.delete ();
+            copyDatabase ();
+        }
+    }
+
+    private void copyDatabase() {
+        try {
+            InputStream myInput = getAssets ().open (  "note_db.sqlite");
+            String outFileName = getApplicationInfo ().dataDir+Data_PATH+"note_db.sqlite";
+            File f = new File(getApplicationInfo ().dataDir+Data_PATH);
+            if(!f.exists ()){
+                f.mkdir ();
+            }
+            OutputStream myOutPut = new FileOutputStream ( outFileName );
+            byte[] buffer = new byte[1024];
+            int len;
+
+            while ((len =myInput.read(buffer))>0){
+                myOutPut.write(buffer,0,len);
+            }
+            myOutPut.flush ();
+            myInput.close ();
+            myOutPut.close ();
+
+        } catch (Exception e) {
+            e.printStackTrace ();
+        }
     }
 
     private void addViews() {
         cardView = findViewById ( R.id.cardview );
         lvTask = findViewById(R.id.lvTask);
-        taskArrayList = new ArrayList<> ();
-        taskAdapter = new TaskAdapter(CityActivity.this, R.layout.item_row,
-                taskArrayList);
+        taskCityArrayList = new ArrayList<> ();
+        taskAdapter = new TaskAdapter(CityActivity.this, R.layout.item_row_city,
+                taskCityArrayList );
         lvTask.setAdapter(taskAdapter);
     }
 
+
     private void PrepareDB() {
-        //Create database
-        databases = new Databases(this, "note_db.sqlite", null, 1);
         //Create table
+
+        databases = new Databases(this, "note_db.sqlite", null, 1);
         databases.QueryData(
                 "CREATE TABLE IF NOT EXISTS Cities(Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        "WorkName VARCHAR(200))"
-        );
-    }
+                        "Cityname VARCHAR(200))"
 
+
+        );
+        databases.QueryData("INSERT INTO Cities VALUES(null, 'HA NOI')");
+        databases.QueryData("INSERT INTO Cities VALUES(null, 'HO CHI MINH')");
+        databases.QueryData("INSERT INTO Cities VALUES(null, 'HAI PHONG')");
+        databases.QueryData("INSERT INTO Cities VALUES(null, 'VINH')");
+        databases.QueryData("INSERT INTO Cities VALUES(null, 'HUE')");
+
+    }
+ private  void LoadData(){
+     SQLiteDatabase database = openOrCreateDatabase("note_db.sqlite", MODE_PRIVATE, null);
+     Cursor cursor = database.rawQuery("SELECT * FROM " + "Cities", null,null);
+
+     while(cursor.moveToNext()){
+         int taskId = cursor.getInt(0);
+         String taskNameCity = cursor.getString(1);
+         taskCityArrayList.add(new TaskCity (taskId, taskNameCity.toUpperCase ()));
+
+     }
+     cursor.close(); taskAdapter.notifyDataSetChanged();
+ }
     private void GetData() {
         Cursor c = databases.GetData("SELECT * FROM Cities");
-        taskArrayList.clear();
+        taskCityArrayList.clear();
         while(c.moveToNext()){
             int taskId = c.getInt(0);
-            String taskName = c.getString(1);
-            taskArrayList.add(new Task(taskId, taskName,null));
+            String taskNameCity = c.getString(1);
+            taskCityArrayList.add(new TaskCity (taskId, taskNameCity.toUpperCase ()));
         }
         taskAdapter.notifyDataSetChanged();
     }
@@ -81,6 +147,7 @@ public class CityActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.mnAddTask){
             openDialog();
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -96,11 +163,11 @@ public class CityActivity extends AppCompatActivity {
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String taskName = edtTaskName.getText().toString();
-                if(taskName.equals("")){
+                String taskNameCity = edtTaskName.getText().toString();
+                if(taskNameCity.equals("")){
                     Toast.makeText(CityActivity.this, "Please enter task name CITY!", Toast.LENGTH_SHORT).show();
                 }else{
-                    databases.QueryData("INSERT INTO Cities VALUES(null, '" + taskName + "')");
+                    databases.QueryData("INSERT INTO Cities VALUES(null, '" + taskNameCity + "')");
                     Toast.makeText(CityActivity.this, R.string.Addedsuccessful, Toast.LENGTH_LONG).show();
                     dialog.dismiss();
                     GetData();
@@ -118,7 +185,7 @@ public class CityActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void openDialogEditTask(final int taskId, String taskName){
+    public void openDialogEditTask(final int taskId, String taskNameCity){
         final Dialog dialog = new Dialog (this);
         dialog.setContentView(R.layout.custom_dialog_edit);
 
@@ -126,13 +193,13 @@ public class CityActivity extends AppCompatActivity {
         Button btnEditTask = dialog.findViewById(R.id.btnEdit);
         Button btnCancel = dialog.findViewById(R.id.btnCancelEdit);
 
-        edtTaskName.setText(taskName);
+        edtTaskName.setText(taskNameCity);
 
         btnEditTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newTaskName = edtTaskName.getText().toString();
-                databases.QueryData("UPDATE Cities SET WorkName = '" + newTaskName +
+                String newTaskNameCity = edtTaskName.getText().toString();
+                databases.QueryData("UPDATE Cities SET Cityname = '" + newTaskNameCity +
                         "' WHERE Id = " +
                         taskId);
                 Toast.makeText(CityActivity.this, R.string.DeletedSucess,

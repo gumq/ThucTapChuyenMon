@@ -8,33 +8,36 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.material.card.MaterialCardView;
 import com.tranlequyen.appdubaothoitiet.CityActivity;
 import com.tranlequyen.appdubaothoitiet.R;
 
 import java.util.List;
 
 public class TaskAdapter extends BaseAdapter {
-    MaterialCardView cardView;
+
     private CityActivity context;
     private int layout;
-    private List<Task> taskList;
+    private List<TaskCity> taskCityList;
 
-    public TaskAdapter(CityActivity context, int layout, List<Task> taskList) {
+    public TaskAdapter(CityActivity context, int layout, List<TaskCity> taskCityList) {
         this.context = context;
         this.layout = layout;
-        this.taskList = taskList;
+        this.taskCityList = taskCityList;
 
     }
+    private static class ViewHolder{
 
+        TextView txtTaskName;
+        ImageView imvDelete, imvEdit,imvDes;
+    }
     @Override
     public int getCount() {
-        return taskList.size();
+        return taskCityList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return taskList.get(i);
+        return taskCityList.get(i);
     }
 
     @Override
@@ -50,15 +53,17 @@ public class TaskAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.
                     getSystemService( Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(layout, null);
+
             holder.txtTaskName = view.findViewById(R.id.txtTaskName);
             holder.imvDelete = view.findViewById(R.id.imvDelete);
             holder.imvEdit = view.findViewById(R.id.imvEdit);
+            holder.imvDes = view.findViewById ( R.id.imvdes );
             view.setTag(holder);
         }else{
             holder = (ViewHolder) view.getTag();
         }
 
-        final Task t = taskList.get(i);
+        final TaskCity t = taskCityList.get(i);
         holder.txtTaskName.setText(t.getTaskName());
 
         holder.imvEdit.setOnClickListener(new View.OnClickListener() {
@@ -78,9 +83,6 @@ public class TaskAdapter extends BaseAdapter {
         return view;
     }
 
-    private static class ViewHolder{
-        MaterialCardView cardView;
-        TextView txtTaskName;
-        ImageView imvDelete, imvEdit;
-    }
+
+
 }
