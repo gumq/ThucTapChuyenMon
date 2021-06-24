@@ -32,4 +32,5 @@
 1. Đồng bộ thêm phần chuyển đổi 2 ngôn ngữ.
 
 ### III. Hướng dẫn sử dụng
-Link download :
+Link download :https://apkfab.com/weather-app/com.tranlequyen.appdubaothoitiet/apk?h=288f054dde16d40b343cd5ab82418257c8b3fe4d8af5e1132f39b906be5c972e
+![image](https://user-images.githubusercontent.com/73639297/123216029-4eda4180-d4f3-11eb-8fc0-93c55aa17563.png)
