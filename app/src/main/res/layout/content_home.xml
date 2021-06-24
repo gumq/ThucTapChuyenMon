@@ -607,6 +607,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/sunsetImage"
                 app:layout_constraintVertical_bias="1.0" />
 
+            <ImageView
+                android:id="@+id/imvaddlistciti"
+                android:layout_width="46dp"
+                android:layout_height="39dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="28dp"
+                app:layout_constraintBottom_toBottomOf="@+id/locationText"
+                app:layout_constraintEnd_toStartOf="@+id/searchField"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/navDrawerMenu"
+                app:srcCompat="@drawable/ic_baseline_playlist_add_24" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

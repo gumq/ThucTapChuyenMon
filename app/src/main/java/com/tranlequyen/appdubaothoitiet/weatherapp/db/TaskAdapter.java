@@ -37,7 +37,7 @@ public class TaskAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return taskCityList.get(i);
+        return taskCityList.get(i).getTaskName ();
     }
 
     @Override

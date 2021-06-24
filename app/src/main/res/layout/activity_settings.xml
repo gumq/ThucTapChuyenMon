@@ -164,8 +164,8 @@
                 android:background="@color/colorLight"
                 android:text="Units"
                 android:textColor="@color/colorAccent"
-                android:textOff="@string/english_en"
-                android:textOn="@string/vietnam_vi"
+                android:textOn="@string/english_en"
+                android:textOff="@string/vietnam_vi"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/fingerprintTextView" />
@@ -219,6 +219,7 @@
                 android:layout_marginTop="36dp"
                 android:completionThreshold="2"
                 android:ems="10"
+                android:text="London"
                 android:padding="16dp"
                 android:textColor="@color/colorLight"
                 android:textColorHint="@color/colorLight"

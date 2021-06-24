@@ -1,7 +1,6 @@
 package com.tranlequyen.appdubaothoitiet;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -36,8 +35,7 @@ public class ForecastHourlyActivity extends AppCompatActivity {
     ArrayList<weatherHour> mangthoitiet;
     TextView txtviewtp;
     ListView lvview;
-    private Boolean mSwitchOnOff;
-    private Boolean mSwitchOnOff2;
+    String alang,bunits;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
@@ -45,17 +43,21 @@ public class ForecastHourlyActivity extends AppCompatActivity {
         Anhxa ();
         Intent intent = getIntent();
         String value1 = intent.getStringExtra("Key_1");
+//        String value2 = intent.getStringExtra("Key_20");
+//        String value3 = intent.getStringExtra("Key_30");
+//            alang = value2;
+//
+//            bunits = value3;
         String citi = value1.toString ();
         findWeatherhour(citi);
+
         imgback.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                onBackPressed ();
+                onBackPressed (); overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
             }
         } );
-        SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
-        mSwitchOnOff = sharedPreferences.getBoolean("switchUnits", false);
-        mSwitchOnOff2 = sharedPreferences.getBoolean("switchLangs", false);
+
 
     }
     private void Anhxa() { imgback=findViewById(R.id.imagebackhour);
@@ -73,11 +75,12 @@ public class ForecastHourlyActivity extends AppCompatActivity {
 
 
             String BASE_URL = "https://api.openweathermap.org/data/2.5/forecast?q=";
-            String API_KEY = "&lang=vi&units=metric&appid=157187733bb90119ccc38f4d8d1f6da7";
+            String API_KEY = "&appid=157187733bb90119ccc38f4d8d1f6da7&lang=vi&units=metric";
             String unitsURL;
             String LANG;
 
-            mWeatherURL = BASE_URL + citi + API_KEY ;
+
+        mWeatherURL = BASE_URL + citi + API_KEY ;
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(ForecastHourlyActivity.this);
@@ -106,7 +109,7 @@ public class ForecastHourlyActivity extends AppCompatActivity {
                             String Nhietdomin = String.valueOf(b.intValue());
                             JSONArray jsonArrayWeather = jsonObjectList.getJSONArray("weather");
                             JSONObject jsonObjectWeather = jsonArrayWeather.getJSONObject(0);
-                            String status = jsonObjectWeather.getString("description");
+                            String status = jsonObjectWeather.getString("description").toUpperCase ();
                             String icon = jsonObjectWeather.getString("icon");
                             mangthoitiet.add(new weatherHour (Hour,Day,status,icon,Nhietdomax,Nhietdomin));
 

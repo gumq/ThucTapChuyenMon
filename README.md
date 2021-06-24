@@ -26,12 +26,10 @@
 15.	Dự báo thời tiết theo mỗi 3 giờ cho hiện tại và tới 5 ngày liên tiếp theo địa điểm hiện tại đang tìm kiếm
 16.	Dự báo chỉ số UV hiện tại và có thông báo để cảnh báo khi chỉ số UV quá cao.
 17.	Dùng Cloude Messaging của Firebase để Push Notification về cho ứng dụng.
-
 * Xuất file apk để dễ cài đặt và sử dụng 
-* Up file apk lên trang webapp.diawi.com
 
 ## III. Các Chức Năng Chưa Hoàn Thiện
 1. Đồng bộ thêm phần chuyển đổi 2 ngôn ngữ.
 
 ### III. Hướng dẫn sử dụng
-Link download : https://webapp.diawi.com/install/qNDgS1
+Link download :

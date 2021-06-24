@@ -47,6 +47,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int ACCESS_LOCATION_PERMISSIONS_REQUEST = 1;
@@ -82,6 +83,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private String mHomeLocation;
     String mDescription;
     private String mLocationFinal;
+    String a,b;
+        private String  mLocationF;
     private String mSearchLocation;
     private String mFavouriteLocation1;
     private String mFavouriteLocation2;
@@ -91,23 +94,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private Boolean mSwitchOnOff;
     private Boolean mSwitchOnOff2;
     private ProgressDialog mProgressDialog;
-    ImageView imvNoti;
+    private  ImageView imvNoti,imvaddlistciti;
+
     NotificationManagerCompat notificationManagerCompat;
     private String SearchLocation1;
-
+    String citynamebycities;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         AnhXa();
 
+
         imvNoti = findViewById ( R.id.imvNoti );
-        imvNoti.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                sendnotification();
-            }
-        } );
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M  ) {// > android 6
             if (ContextCompat.checkSelfPermission(Home.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 getPermissionToAccessLocation();
@@ -116,19 +115,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             Toast.makeText ( this,"Nhận diện thiết bị dưới anroid 6", Toast.LENGTH_SHORT).show ();
         }
 
+
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
         mSwitchOnOff = sharedPreferences.getBoolean("switchUnits", false);
         mSwitchOnOff2 = sharedPreferences.getBoolean("switchLangs", false);
         mHomeLocation = sharedPreferences.getString("homeLocation", "HO CHI MINH");
-        mFavouriteLocation1 = sharedPreferences.getString("favouriteLocation1", "");
-        mFavouriteLocation2 = sharedPreferences.getString("favouriteLocation2", "");
-        mFavouriteLocation3 = sharedPreferences.getString("favouriteLocation3", "");
-        mFavouriteLocation4 = sharedPreferences.getString("favouriteLocation4", "");
-        mFavouriteLocation5 = sharedPreferences.getString("favouriteLocation5", "");
+        mFavouriteLocation1 = sharedPreferences.getString("favouriteLocation1", "NGA");
+        mFavouriteLocation2 = sharedPreferences.getString("favouriteLocation2", "HÀ LAN");
+        mFavouriteLocation3 = sharedPreferences.getString("favouriteLocation3", "TÂY BAN NHA");
+        mFavouriteLocation4 = sharedPreferences.getString("favouriteLocation4", "PHÁP");
+        mFavouriteLocation5 = sharedPreferences.getString("favouriteLocation5", "ANH");
 
-        if(mHomeLocation==""){
-            findWeather ( "Saigon",null,null );
-        }
 
 
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -154,15 +151,44 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
 
+        imvaddlistciti.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder b = new AlertDialog.Builder(Home.this);
+                b.setTitle("Xác nhận");
+                b.setIcon ( R.drawable.giotnuoc );
+                b.setMessage("Bạn muốn thêm "+mLocationF+" vào danh sách thành phố? ");
+                b.setPositiveButton ( R.string.ok, new DialogInterface.OnClickListener () {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent6 = new Intent ( Home.this,CityActivity.class );
+                        intent6.putExtra("Key_6",  mLocationF);
+                        startActivity ( intent6 );
+                        Toast.makeText ( Home.this,"Đã thêm "+ mLocationF+" vào danh sách thành phố",Toast.LENGTH_SHORT ).show ();
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                    }
+                } );
 
+                b.setNegativeButton ( R.string.NO, new DialogInterface.OnClickListener () {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel ();
+                    }
+                } );AlertDialog al = b.create();
+            //Hiển thị
+                al.show();
+
+            }
+        } );
         txtclickchitiet.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent ( Home.this,ForecastHourlyActivity.class );
                 intent.putExtra("Key_1", mLocationFinal.toString ());
-                intent.putExtra ( "Key2",mDescription.toString ());
+//                intent.putExtra ( "Key_20",a.toString ());
+//                intent.putExtra ( "Key_30",b.toString ());
                 startActivity ( intent );
-
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         } );
         mSearchField.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -173,6 +199,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 findForecast(selectedLocation, "", "");
             }
         });
+
+
 
 
         mSearchField.setOnKeyListener(new View.OnKeyListener() {
@@ -204,7 +232,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     Intent intent = new Intent ( Intent.ACTION_SEND );
                     intent.setType ( "text/plain" );
                     String shareI ="THOI TIET HOM NAY:-https://www.accuweather.com/vi/vn/ho-chi-minh-city/353981/hourly-weather-forecast/353981 " +
-                            "Tải app: https://webapp.diawi.com/install/Mis51Z";
+                            "";
                     String sharesub="Du bao thoi tiet hom nay";
                     intent.putExtra ( Intent.EXTRA_SUBJECT,sharesub );
                     intent.putExtra ( Intent.EXTRA_TEXT,shareI );
@@ -212,6 +240,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     startActivity ( Intent.createChooser ( intent, "Share App" ) );
 
             } });
+        Intent intent8 = getIntent();
+        String value8 = intent8.getStringExtra("Key_8");
+        if(value8!=null){
+
+            citynamebycities = value8;
+            mSearchField.setText ( citynamebycities );
+            findWeather ( value8,"","" );
+            findForecast (  value8,"","" );
+        }
+
+
 
 // Menu navigation drawn
         final Menu menu = navigationView.getMenu();
@@ -243,12 +282,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             findWeather("", latitude, longitude);
             findForecast("", latitude, longitude);
 
-        } else {
-
+        }if(citynamebycities!=null){
+            findWeather (citynamebycities,"",""  );
+            findForecast ( citynamebycities,"",""  );
+        }else {
             findWeather(mHomeLocation, "", "");
-            findForecast(mHomeLocation, "", "");
-        }
-    }
+        findForecast(mHomeLocation, "", "");
+    }}
 
     private void sendnotification() {
         Intent reintent = new Intent ( this,Home.class );
@@ -256,7 +296,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
 
         Notification notification = new NotificationCompat.Builder(this, NotificationApp.CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.icon_rain)
+                .setSmallIcon(R.drawable.icon_clear)
                 .setContentTitle(mLocationFinal)
                 .setContentText( mDescription)
                 .setAutoCancel ( true )
@@ -266,6 +306,25 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 .build();
 
         int notificationId = 1;
+        notificationManagerCompat.notify(notificationId, notification);
+    }
+    private void sendnotification3() {
+        Intent reintent = new Intent ( this,Home.class );
+        PendingIntent pendingIntent = PendingIntent.getActivities ( this,1, new Intent[]{reintent},PendingIntent.FLAG_UPDATE_CURRENT );
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+
+        Notification notification = new NotificationCompat.Builder(this, NotificationApp.CHANNEL_3_ID)
+
+                .setSmallIcon(R.drawable.icon_rain)
+                .setContentTitle(mLocationFinal+"\t^"+mDescription)
+                .setContentText( "Cẩn thận, dự đoán sẽ có mưa trong 3 giờ tới")
+                .setAutoCancel ( true )
+                .setContentIntent ( pendingIntent )
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setCategory(NotificationCompat.CATEGORY_PROMO)
+                .build();
+
+        int notificationId = 3;
         notificationManagerCompat.notify(notificationId, notification);
     }
     private void sendnotification2() {
@@ -290,6 +349,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
 
     private void AnhXa() {
+        imvaddlistciti = findViewById ( R.id.imvaddlistciti );
         mSearchField = findViewById(R.id.searchField);
         txtclickchitiet = findViewById ( R.id.txtclickchitiet );
         mTemperatureText = findViewById(R.id.temperatureText);
@@ -458,14 +518,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             String LANG;
             if (mSwitchOnOff) {
                 unitsURL = "&units=imperial";
+
+
             } else {
                 unitsURL = "&units=metric";
+
             }
 
+
             if (mSwitchOnOff2) {
-                LANG = "&lang=vi";
+                LANG = "&lang=en";
+
             } else {
-               LANG = "&lang=en";
+               LANG = "&lang=vi";
             }
             mWeatherURL = BASE_URL + LAT_LON + API_KEY + unitsURL+LANG;
         } else {
@@ -480,9 +545,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 unitsURL = "&units=metric";
             }
             if (mSwitchOnOff2) {
-                LANG = "&lang=vi";
-            } else {
                 LANG = "&lang=en";
+            } else {
+                LANG = "&lang=vi";
             }
             mWeatherURL = BASE_URL + city + API_KEY + unitsURL+LANG;
         }
@@ -568,8 +633,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     }
 
                     //final strings
-                    mDescription = description.toUpperCase ()+"\t\t\t"+temp+"°C";
+                    mDescription ="Cảm giác: "+temp+"°C  "+ description.toUpperCase ();
                     mLocationFinal = (city + ", " + country);
+                    mLocationF = (city.toUpperCase ());
                     String humidityFinal = (humidity + "%");
                     String PressureFinal = (pressure + "hPa");
                     String temperatureFinalMetric = (temp + "°C");
@@ -703,9 +769,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 unitsURL = "&units=metric";
             }
             if (mSwitchOnOff2) {
-                LANG = "&lang=vi";
-            } else {
                 LANG = "&lang=en";
+            } else {
+                LANG = "&lang=vi";
             }
 
             mForecastURL = BASE_URL + LAT_LON + API_KEY + unitsURL+LANG;
@@ -720,9 +786,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 unitsURL = "&units=metric";
             }
             if (mSwitchOnOff2) {
-                LANG = "&lang=vi";
-            } else {
                 LANG = "&lang=en";
+            } else {
+                LANG = "&lang=vi";
             }
             mForecastURL = BASE_URL + city + API_KEY + unitsURL+LANG;
         }
@@ -869,7 +935,30 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                     //final strings
                     String temperatureForecastMetric4 = (tempForecast4 + "°C");
                     String temperatureForecastImperial4 = (tempForecast4 + "°F");
+                   // israin 3h
+                    JSONObject arrayObject5 = listArray.getJSONObject(0);
+                    //weather object inside list array
+                    JSONArray weatherArray5 = arrayObject5.getJSONArray("weather");
+                    JSONObject weatherObject5 = weatherArray5.getJSONObject(0);
+                    String forecastId5 = weatherObject5.getString("id");
+                    int forecastIdInt5 = Integer.parseInt(forecastId5);
 
+                            if((forecastIdInt5 >=200&&forecastIdInt5<=232)||(forecastIdInt5 >=300&&forecastIdInt5<=321)
+                                    ||(forecastIdInt5 >=500&&forecastIdInt5<=531)||(forecastIdInt5 ==804)){
+                                imvNoti.setOnClickListener ( new View.OnClickListener () {
+                                    @Override
+                                    public void onClick(View v) {
+                                        sendnotification3 ();
+                                    }
+                                } );
+           }else {
+                                imvNoti.setOnClickListener ( new View.OnClickListener () {
+                                    @Override
+                                    public void onClick(View v) {
+                                        sendnotification ();
+                                    }
+                                } );
+                            }
                     //change forecast icon
                     ImageView day1Icon = findViewById(R.id.day1Icon);
                     if (forecastIdInt0 >= 200 && forecastIdInt0 <= 232) {
