@@ -34,3 +34,21 @@
 ### III. Hướng dẫn sử dụng
 Link download :https://apkfab.com/weather-app/com.tranlequyen.appdubaothoitiet/apk?h=288f054dde16d40b343cd5ab82418257c8b3fe4d8af5e1132f39b906be5c972e
 ![image](https://user-images.githubusercontent.com/73639297/123216029-4eda4180-d4f3-11eb-8fc0-93c55aa17563.png)
+####
+![image](https://user-images.githubusercontent.com/73639297/154795003-1ab6f9d3-a47a-4a6c-80c2-d71daf86b8c3.png)
+
+![image](https://user-images.githubusercontent.com/73639297/154794969-57200d78-27bf-48c0-a60d-df14a16e29ff.png)
+
+
+![image](https://user-images.githubusercontent.com/73639297/154794980-d321b81c-582f-480a-ab5a-7c8e2aa99467.png)
+
+![image](https://user-images.githubusercontent.com/73639297/154794986-4ab4f6bb-dd9f-42c4-a37f-690a814f1cee.png)
+
+![image](https://user-images.githubusercontent.com/73639297/154795199-0488c9e9-2d52-4aaa-aa92-dee2d2d7cf4f.png)
+
+![image](https://user-images.githubusercontent.com/73639297/154795215-eabca683-bfd7-4225-b662-14a870064aa2.png)
+
+
+
+
+
